@@ -1,7 +1,7 @@
 <template>
-<button class='btn':style="{background:color}" @click='onClick()'>{{text }}</button>
+<button class='btn' :style="{background:color}" @click=onClick()>{{text}}</button>
 </template>
-<sript>
+<script>
 export default {
     name:'Button',
     props:{
@@ -10,8 +10,8 @@ export default {
     },
     methods:{
         onClick(){
-            console.log("clicked")
+            console.log("clicked");
         }
     }
 }
-</sript>
+</script>
