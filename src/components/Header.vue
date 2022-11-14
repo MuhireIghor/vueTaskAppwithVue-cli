@@ -1,8 +1,8 @@
 <template>
-<div class='header'>
+<header class='header'>
 <h1>{{title}}</h1>
 <Button text='Add Task' color='green'  />   
-</div>
+</header>
 </template>
 <script>
 import Button from './Button'
