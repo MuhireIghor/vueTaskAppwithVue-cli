@@ -3,7 +3,7 @@
   <div v-show="showAddTask">
 <AddTask  @add-task ="addTask"/>
   </div>
-<Header @toggle-add-task="toggleAddTask" title='Task Tracker' />
+<Header @toggle-add-task="toggleAddTask" title='Task Tracker' :ShowAddTask="showAddTask" />
 <Tasks :tasks="tasks" @delete-task="handleDelete" @toggleReminder="handleToggle" />
 </div>
 </template>
