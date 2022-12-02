@@ -19,9 +19,7 @@ export default {
     AddTask
   },
   methods:{
-    addTask(task){
-      this.tasks = [...this.tasks,task]
-    },
+
     toggleAddTask(){
       this.showAddTask = !this.showAddTask;
 
@@ -35,6 +33,26 @@ export default {
       this.tasks = this.tasks.map((task)=>task.id === id?{...task,reminder:!task.reminder}:task)
  
     },
+    async fetchTasks(){
+      const data = await fetch("api/tasks");
+      const result = await data.json();
+      return result;
+    },
+    async fetchTask(id){
+      const data = await fetch(`api/task/${id}`);
+      const result = await data.json();
+      return result;
+    },
+    async addTask(task){
+      const data= await fetch("api/task",{
+        method:'POST',
+        headers:{
+          'Content-type':'application/json'
+        },
+        body:JSON.stringify(task)
+      });
+      
+    }
   }
   ,
   data(){
@@ -43,27 +61,8 @@ export default {
       showAddTask:false
     }
   },
-  created(){
-    this.tasks = [
-      {
-        id:1,
-        text:"Testing the work 1",
-        day:"2022 12 06 12:00",
-        reminder:true
-      },
-      {
-        id:2,
-        text:"Testing the work 2",
-        day:"2022 12 06 12:00",
-        reminder:true
-      },
-      {
-        id:3,
-        text:"Testing the work 3",
-        day:"2022 12 06 12:00",
-        reminder:false
-      },
-    ]
+ async created(){
+    this.tasks =await this.fetchTasks();
   }
 }
 </script>
