@@ -24,11 +24,15 @@ export default {
       this.showAddTask = !this.showAddTask;
 
     },
-    handleDelete(id){
-      if(confirm("Are you sure ?")){
-        this.tasks = this.tasks.filter((task)=>task.id !== id)
-      }
-    },
+    async handleDelete(id){
+      const data = await fetch(`api/tasks/${id}`,{
+        method:'DELETE'
+      })
+     { data.status === 200 ? (
+          this.tasks = this.tasks.filter((task)=>task.id !== id)
+        
+      ):(alert("Error on deleting Task"))
+    }},
     handleToggle(id){
       this.tasks = this.tasks.map((task)=>task.id === id?{...task,reminder:!task.reminder}:task)
  
@@ -44,14 +48,15 @@ export default {
       return result;
     },
     async addTask(task){
-      const data= await fetch("api/task",{
+      const data= await fetch("api/tasks",{
         method:'POST',
         headers:{
           'Content-type':'application/json'
         },
         body:JSON.stringify(task)
       });
-      
+      // const res = await data.json();
+
     }
   }
   ,
